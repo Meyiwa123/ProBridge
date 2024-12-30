@@ -1,6 +1,14 @@
 import { useState, useEffect } from "react";
 
-export default function LyricsFormatter({ lyrics }: { lyrics: string }) {
+interface LyricsFormatterProps {
+  lyrics: string;
+  onFormat: (formattedLyrics: string) => void;
+}
+
+export default function LyricsFormatter({
+  lyrics,
+  onFormat,
+}: LyricsFormatterProps) {
   const [boldWords, setBoldWords] = useState<string[]>([]);
   const [precision, setPrecision] = useState<number>(50);
   const [lyricsState, setLyricsState] = useState<string>("");
@@ -72,6 +80,7 @@ export default function LyricsFormatter({ lyrics }: { lyrics: string }) {
     const repetitionHandled = detectRepetition(lyricsState);
     const fullyFormatted = handleUppercase(repetitionHandled);
     setFormattedLyrics(fullyFormatted);
+    onFormat(fullyFormatted);
   };
 
   return (

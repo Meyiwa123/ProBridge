@@ -3,12 +3,19 @@ import Hero from "./components/Hero";
 import Footer from "./components/Footer";
 import LyricsFormatter from "./components/LyricsFormatter";
 import Header from "./components/Header";
+import SlideCreator from "./components/SlideCreator";
+import GraphicCreatorCTA from "./components/CTA";
 
 export default function App() {
   const [lyrics, setLyrics] = useState<string | null>(null);
+  const [formattedLyrics, setFormattedLyrics] = useState<string>("");
 
   const handleImportLyrics = (formattedLyrics: string) => {
     setLyrics(formattedLyrics);
+  };
+
+  const handleFormattedLyrics = (lyrics: string) => {
+    setFormattedLyrics(lyrics);
   };
 
   return (
@@ -17,14 +24,23 @@ export default function App() {
         <Header onImportLyrics={handleImportLyrics} />
       </header>
 
-      <main className="flex-grow px-4 lg:px-8">
-        <div className="relative z-10">
-          <Hero />
+      <main>
+        <div className="flex-grow px-4 lg:px-8">
+          <div className="relative z-10">
+            <Hero />
+          </div>
+
+          <div className="max-w-7xl mx-auto pt-8 pb-16 relative z-10">
+            <LyricsFormatter
+              lyrics={lyrics ?? ""}
+              onFormat={handleFormattedLyrics}
+            />
+          </div>
         </div>
 
-        <div className="max-w-7xl mx-auto pt-8 pb-16 relative z-10">
-          <LyricsFormatter lyrics={lyrics ?? ""} />
-        </div>
+        <GraphicCreatorCTA />
+
+        <SlideCreator formattedLyrics={formattedLyrics} />
       </main>
 
       <footer className="flex-shrink-0 relative z-10">
