@@ -22,6 +22,7 @@ export default function SlideCreator({ formattedLyrics }: SlideCreatorProps) {
   const [textVerticalAlign, setTextVerticalAlign] = useState<
     "top" | "center" | "bottom"
   >("center");
+  // @ts-ignore
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [fontSize, setFontSize] = useState<number>(24);
   const [fontFamily, setFontFamily] = useState<string>("Arial");
@@ -262,7 +263,9 @@ export default function SlideCreator({ formattedLyrics }: SlideCreatorProps) {
 
         {/* Color Selection */}
         <div className="mb-4">
-          <h3 className="font-semibold mb-2">Select Colors for Capitalized Words:</h3>
+          <h3 className="font-semibold mb-2">
+            Select Colors for Capitalized Words:
+          </h3>
           <div className="grid grid-cols-5 gap-2">
             {colors.map((color) => (
               <div
